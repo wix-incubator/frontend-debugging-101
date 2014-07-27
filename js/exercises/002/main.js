@@ -1,5 +1,6 @@
 module.exports = {
     restart      : restart,
+    reset        : reset,
     name         : 'check for this',
     subtitle     : 'scoping',
     instructions : 'Click the button to pass (2)',
@@ -45,4 +46,8 @@ function restart(stage, env){
 
         }
     );
+}
+
+function reset(stage, env){
+
 }

@@ -1,5 +1,6 @@
 module.exports = {
     restart      : restart,
+    reset        : reset,
     name         : 'console error',
     subtitle     : 'let the console show you where',
     instructions : 'Click the button to pass'
@@ -19,9 +20,15 @@ function restart(stage, env){
          });
     }
 
-    env.code.create(code.toString(),
+    var codeStr = env.getData('code') || code.toString();
+
+    env.code.create(codeStr,
         {},
         function(err, scriptCode){
+
+            env.codeWatcher.watchCode(scriptCode, function(func, newVal, oldVal){
+                env.saveData('code', newVal);
+            });
 
             scriptCode(button, function passClickEventToFinishCB(event){
                 var passed = (event instanceof MouseEvent && event.target === button);
@@ -30,4 +37,8 @@ function restart(stage, env){
 
         }
     );
+}
+
+function reset(stage, env){
+    env.removeData('code');
 }

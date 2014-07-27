@@ -85,6 +85,21 @@
         .level-list li{
             transition: all 0.2s linear;
         }
+        level-reset-btn{
+            position: absolute;
+            color: yellow;
+            right: 28px;
+            display: block;
+            bottom: -25px;
+            cursor: pointer;
+        }
+        level-reset-btn:hover{
+            text-decoration: underline;
+        }
+        #game-wrapper > header{
+            position: relative;
+            display: block;
+        }
         #mussa{
             position: fixed;
             left: -60px;
@@ -97,7 +112,10 @@
 <body class="center-con">
 
     <div id="game-wrapper">
-        <level-title></level-title>
+        <header>
+            <level-reset-btn>reset level</level-reset-btn>
+            <level-title></level-title>
+        </header>
         <level></level>
         <levels></levels>
     </div>

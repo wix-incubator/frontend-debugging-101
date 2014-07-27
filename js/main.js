@@ -3,6 +3,8 @@
 var clog = require('./console-logger');
 var code = require('./code-compiler');
 var storage = require('./level-storage');
+var codeWatcher = require('./code-watcher');
+
 var LEVELS = [
     require("./exercises/001/main.js"),
     require("./exercises/002/main.js"),
@@ -11,6 +13,7 @@ var LEVELS = [
     require("./exercises/005/main.js")
 ];
 var _options;
+var currentLevelIndex;
 
 module.exports = {
     init : init
@@ -20,6 +23,7 @@ function init(options) {
     _options = options;
     code.init(options.codeOptions);
     setLevels(_options.gameNode.querySelector('levels'));
+    _options.gameNode.querySelector('level-reset-btn').addEventListener('click', resetCurrentLevel);
     playLevel(0);
 }
 
@@ -27,17 +31,12 @@ function playLevel(levelIndex){
     clearLevel();
     var level = getLevel(levelIndex);
     if(level){
+        currentLevelIndex = levelIndex;
         var levelTitleNode = _options.gameNode.querySelector('level-title');
         levelTitleNode.setAttribute('index', levelIndex + 1);
         levelTitleNode.innerText = level.name;
         getLevelButton(levelIndex).setAttribute('current', true);
-        level.restart(_options.levelNode, {
-            finishLevel: finishLevel.bind(null, levelIndex),
-            code: code,
-            clog: clog,
-            saveData: storage.saveData.bind(null, levelIndex),
-            getData: storage.getData.bind(null, levelIndex)
-        });
+        level.restart(_options.levelNode, getLevelEnv(levelIndex));
     } else {
         console.log('LEVEL %s NOT FOUND', levelIndex);
     }
@@ -48,6 +47,7 @@ function clearLevel(){
     _options.levelNode.innerHTML = '';
     _options.levelNode.setAttribute('style', '');
     _options.levelNode.setAttribute('class', '');
+    codeWatcher.stopAll();
     var lvlBtns = _options.gameNode.querySelector('levels').firstChild.childNodes;
     for(var i = 0; i < lvlBtns.length; ++i){
         lvlBtns[i].removeAttribute('current');
@@ -61,6 +61,29 @@ function finishLevel(levelIndex, mode){
     levelButton.setAttribute('done', mode);
     if(getLevelAmount() > levelIndex+1){
         playLevel(levelIndex+1);
+    }
+}
+
+function getLevelEnv(levelIndex) {
+    return {
+        finishLevel: finishLevel.bind(null, levelIndex),
+        code: code,
+        clog: clog,
+        codeWatcher: codeWatcher,
+        saveData: storage.saveData.bind(null, levelIndex),
+        getData: storage.getData.bind(null, levelIndex),
+        removeData: storage.removeData.bind(null, levelIndex)
+    }
+}
+
+function resetCurrentLevel(){
+    var level = getLevel(currentLevelIndex);
+    if(level){
+        var levelButton = getLevelButton(currentLevelIndex);
+        levelButton.setAttribute('done', false);
+        storage.setIsPass(currentLevelIndex, false);
+        level.reset(_options.levelNode, getLevelEnv(currentLevelIndex));
+        playLevel(currentLevelIndex);
     }
 }
 

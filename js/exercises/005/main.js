@@ -2,6 +2,7 @@ var async = require('async');
 
 module.exports = {
     restart      : restart,
+    reset        : reset,
     name         : 'how did I get here?',
     subtitle     : '',
     instructions : ''
@@ -41,4 +42,8 @@ function restart(stage, env){
             });
         });
     });
+}
+
+function reset(stage, env){
+
 }

@@ -1,5 +1,6 @@
 module.exports = {
     restart      : restart,
+    reset        : reset,
     name         : 'someone is touching my dom!',
     subtitle     : '',
     instructions : 'Click the button to pass (2)'
@@ -43,4 +44,8 @@ function restart(stage, env){
 
         }
     );
+}
+
+function reset(stage, env){
+
 }
