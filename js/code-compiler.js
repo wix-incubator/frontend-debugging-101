@@ -22,6 +22,8 @@ function create(code, options, callback){
     var id = 'f' + codeIndex++;
     callbacks[id] = callback;
 
+//    createScriptFromEval(id, code, contentFileName); return;
+
     var url = createScriptUrlFromBlob(id, code, contentFileName);
 
     var scriptTag = document.createElement('script');
@@ -34,6 +36,10 @@ function getFileName(name){
     contentFileName += '_' + Math.random();
     return contentFileName;
 }
+
+//function createScriptFromEval(id, code, contentFileName) {
+//    eval(code + '\n\n/** CODE END **/\n\n)' + '//# sourceURL=' +  contentFileName);
+//}
 
 function createScriptUrlFromBlob(id, code, contentFileName){
     var content = _options.registerPath + '("' + id + '", \n\n/** CODE START **/\n\n' + code + '\n\n/** CODE END **/\n\n)' + '//# sourceURL=' +  contentFileName;
