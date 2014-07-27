@@ -1,3 +1,5 @@
+var sourceFunc = require('./usrcode').func1;
+
 module.exports = {
     restart      : restart,
     reset        : reset,
@@ -14,13 +16,7 @@ function restart(stage, env){
 
     var button = stage.firstChild;
 
-    function code(buttonNode, passClickEventToFinishCB){
-        buttonNode.addEventListener("click", function(event){
-            passClickEventToFinishCB(even);
-         });
-    }
-
-    var codeStr = env.getData('code') || code.toString();
+    var codeStr = env.getData('code') || sourceFunc.toString();
 
     env.code.create(codeStr,
         {},

@@ -1,4 +1,7 @@
 var async = require('async');
+var usrCode = require('./usrcode');
+var sourceFunc1 = usrCode.func1;
+var sourceFunc2 = usrCode.func2;
 
 module.exports = {
     restart      : restart,
@@ -18,17 +21,8 @@ function restart(stage, env){
 
     var buttonNode = stage.querySelector('button');
 
-    function code1(code2, finishCB){
-        finishCB = console.log.bind(console, 'this is not the right callback!?!');
-        setTimeout(code2, 10, finishCB);
-    }
-
-    function code2(finishCB){
-        finishCB();
-    }
-
-    var code1Str = env.getData('code1') || code1.toString();
-    var code2Str = env.getData('code2') || code2.toString();
+    var code1Str = env.getData('code1') || sourceFunc1.toString();
+    var code2Str = env.getData('code2') || sourceFunc2.toString();
 
     async.parallel({
         one: function(callback){

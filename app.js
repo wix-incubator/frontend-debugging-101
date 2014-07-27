@@ -25,9 +25,12 @@ app.use("/public", express.static(__dirname + "/static"));
 app.get("/bundle.js", function(req, res) {
     res.setHeader('Content-Type', 'text/javascript');
     browserify()
-//        .transform({
-//            global: true
-//        }, 'uglifyify')
+        .transform({
+            global: true,
+            ignore: [
+                '**/js/exercises/**/usrcode.js'
+            ]
+        }, 'uglifyify')
         .require('./js/main.js')
         .bundle()
         .pipe(res);

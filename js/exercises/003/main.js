@@ -1,3 +1,5 @@
+var sourceFunc = require('./usrcode').func1;
+
 module.exports = {
     restart      : restart,
     reset        : reset,
@@ -15,22 +17,7 @@ function restart(stage, env){
 
     var buttonNode = stage.querySelector('button');
 
-    function code(button){
-        button.style.position = 'absolute';
-        if(button.style.left) {
-            button.style.top = null;
-            button.style.left = null;
-            button.style.right = '20px';
-            button.style.bottom = '20px';
-        } else {
-            button.style.right = null;
-            button.style.bottom = null;
-            button.style.top = '20px';
-            button.style.left = '20px';
-        }
-    }
-
-    var codeStr = env.getData('code') || code.toString();
+    var codeStr = env.getData('code') || sourceFunc.toString();
 
     env.code.create(codeStr,
         {},

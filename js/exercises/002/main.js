@@ -1,3 +1,5 @@
+var sourceFunc = require('./usrcode').func1;
+
 module.exports = {
     restart      : restart,
     reset        : reset,
@@ -27,13 +29,7 @@ function restart(stage, env){
     var input1 = stage.querySelector('#input1');
     var input2 = stage.querySelector('#input2');
 
-    function code(valInput1, valInput2){
-        return function getResult(valInput1, valInput2){
-            return parseInt(valInput1.value) + parseInt(valInput2.value);
-        }
-    }
-
-    var codeStr = env.getData('code') || code.toString();
+    var codeStr = env.getData('code') || sourceFunc.toString();
 
     env.code.create(codeStr,
         {},
