@@ -27,15 +27,26 @@ function restart(stage, env){
         finishCB();
     }
 
+    var code1Str = env.getData('code1') || code1.toString();
+    var code2Str = env.getData('code2') || code2.toString();
+
     async.parallel({
         one: function(callback){
-            env.code.create(code1.toString(), { name:'ONE' }, callback);
+            env.code.create(code1Str, { name:'ONE' }, callback);
         },
         two: function(callback){
-            env.code.create(code2.toString(), { name:'TWO' }, callback);
+            env.code.create(code2Str, { name:'TWO' }, callback);
         }
     },
     function(err, results) {
+
+        env.codeWatcher.watchCode(results.one, function(func, newVal, oldVal){
+            env.saveData('code1', newVal);
+        });
+        env.codeWatcher.watchCode(results.two, function(func, newVal, oldVal){
+            env.saveData('code2', newVal);
+        });
+
         buttonNode.addEventListener("click", function(){
             results.one(results.two, function(){
                 env.finishLevel(true);
@@ -45,5 +56,6 @@ function restart(stage, env){
 }
 
 function reset(stage, env){
-
+    env.removeData('code1');
+    env.removeData('code2');
 }

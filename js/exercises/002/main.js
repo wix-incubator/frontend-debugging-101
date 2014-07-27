@@ -33,10 +33,17 @@ function restart(stage, env){
         }
     }
 
-    env.code.create(code.toString(),
+    var codeStr = env.getData('code') || code.toString();
+
+    env.code.create(codeStr,
         {},
-        function(err, publicScript){
-            var getResultFunc = publicScript(input1, input2);
+        function(err, scriptCode){
+
+            env.codeWatcher.watchCode(scriptCode, function(func, newVal, oldVal){
+                env.saveData('code', newVal);
+            });
+
+            var getResultFunc = scriptCode(input1, input2);
 
             buttonNode.addEventListener("click", function(event){
                 var result = getResultFunc(null, null);
@@ -49,5 +56,5 @@ function restart(stage, env){
 }
 
 function reset(stage, env){
-
+    env.removeData('code');
 }

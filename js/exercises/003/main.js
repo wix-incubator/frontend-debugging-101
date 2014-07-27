@@ -30,13 +30,19 @@ function restart(stage, env){
         }
     }
 
-    env.code.create(code.toString(),
+    var codeStr = env.getData('code') || code.toString();
+
+    env.code.create(codeStr,
         {},
-        function(err, publicScript){
+        function(err, scriptCode){
 
-            publicScript(buttonNode);
+            env.codeWatcher.watchCode(scriptCode, function(func, newVal, oldVal){
+                env.saveData('code', newVal);
+            });
 
-            buttonNode.addEventListener('mouseover', publicScript.bind(null, buttonNode));
+            scriptCode(buttonNode);
+
+            buttonNode.addEventListener('mouseover', scriptCode.bind(null, buttonNode));
 
             buttonNode.addEventListener("click", function(){
                 env.finishLevel(true);
@@ -47,5 +53,5 @@ function restart(stage, env){
 }
 
 function reset(stage, env){
-
+    env.removeData('code');
 }
