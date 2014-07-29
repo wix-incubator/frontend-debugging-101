@@ -1,5 +1,6 @@
 "use strict";
 
+var clog = require('./console-logger');
 var watchedCode = [];
 
 module.exports = {
@@ -37,6 +38,7 @@ function checkCodeChanges(){
         if(currentVal !== prevVal){
             watchData.callback(watchData.func, currentVal, prevVal);
             watchData.val = currentVal;
+            clog.info('code changed successfully!');
         }
     });
 }

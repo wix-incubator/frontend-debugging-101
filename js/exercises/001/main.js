@@ -5,11 +5,10 @@ module.exports = {
     reset        : reset,
     name         : 'console error',
     subtitle     : 'let the console show you where',
-    instructions : 'Click the button to pass'
+    instructions : 'Click the button\n and fix the error\n that will popup\n in the console'
 };
 
 function restart(stage, env){
-    env.clog.log('Click the button to pass');
 
     stage.classList.add('center-con');
     stage.innerHTML = '<button class="btn btn-default btn-lg" type="button">click to pass!</button>';
@@ -28,7 +27,11 @@ function restart(stage, env){
 
             scriptCode(button, function passClickEventToFinishCB(event){
                 var passed = (event instanceof MouseEvent && event.target === button);
-                env.finishLevel(passed);
+                if(passed){
+                    env.finishLevel(passed);
+                } else {
+                    env.clog.error('something is wrong :-/');
+                }
             });
 
         }

@@ -7,13 +7,12 @@ module.exports = {
     restart      : restart,
     reset        : reset,
     name         : 'how did I get here?',
-    subtitle     : '',
-    instructions : ''
+    subtitle     : 'asynchronous stack..',
+    instructions : 'you have the wrong\n callback.\n find the code \nthat passed it.'
 
 };
 
 function restart(stage, env){
-    env.clog.log('Click the button to pass');
 
     stage.classList.add('center-con');
     stage.innerHTML = '' +

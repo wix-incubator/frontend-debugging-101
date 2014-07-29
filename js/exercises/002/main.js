@@ -3,31 +3,20 @@ var sourceFunc = require('./usrcode').func1;
 module.exports = {
     restart      : restart,
     reset        : reset,
-    name         : 'check for this',
-    subtitle     : 'scoping',
-    instructions : 'Click the button to pass (2)',
+    name         : 'click & wait',
+    subtitle     : 'check for this',
+    instructions : 'another error?\n check for this',
     working      : false
 };
 
 function restart(stage, env){
-    env.clog.log('Click the button to pass');
 
-    var val1 = Math.round(Math.random() * 10);
-    var val2 = Math.round(Math.random() * 10);
+    stage.classList.add('center-con');
 
     stage.innerHTML = '' +
-        '<input type="text" value="' + val1 + '" disabled="true" id="input1">' +
-        '<span> + </span>' +
-        '<input type="text" value="' + val2 + '" disabled="true" id="input2">' +
-        '<span> = </span>' +
-        '<input type="text" value="?" id="resultInput">' +
-        '<br/>' +
-        '<button class="btn btn-default btn-lg" type="button">calculate result!</button>';
+        '<button class="btn btn-default btn-lg" type="button">click..</button>';
 
     var buttonNode = stage.querySelector('button');
-    var resultInput = stage.querySelector('#resultInput');
-    var input1 = stage.querySelector('#input1');
-    var input2 = stage.querySelector('#input2');
 
     var codeStr = env.getData('code') || sourceFunc.toString();
 
@@ -39,12 +28,24 @@ function restart(stage, env){
                 env.saveData('code', newVal);
             });
 
-            var getResultFunc = scriptCode(input1, input2);
+            var CallLaterClass = scriptCode();
 
-            buttonNode.addEventListener("click", function(event){
-                var result = getResultFunc(null, null);
-                var passed = (result === parseInt(input1.value) + parseInt(input2.value));
-                env.finishLevel(passed);
+            var clickTime = null;
+
+            var callLaterIns = new CallLaterClass(function finishCallback(){
+                if(clickTime && (new Date()-clickTime > 80)){
+                    env.finishLevel(true);
+                } else {
+                    env.clog.error('something is wrong :-/');
+                }
+            });
+
+            buttonNode.addEventListener('click', function(){
+                clickTime = new Date();
+                callLaterIns.callMeLaterToFinish(100);
+                setTimeout(function(){ // clear click time for safety..
+                    clickTime = null;
+                }, 200);
             });
 
         }

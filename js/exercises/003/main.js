@@ -5,12 +5,11 @@ module.exports = {
     reset        : reset,
     name         : 'someone is touching my dom!',
     subtitle     : '',
-    instructions : 'Click the button to pass (2)'
+    instructions : 'all you need\n to do is\n click the button :)'
 
 };
 
 function restart(stage, env){
-    env.clog.log('Click the button to pass');
 
     stage.innerHTML = '' +
         '<button class="btn btn-default btn-lg" type="button">catch me if you can</button>';

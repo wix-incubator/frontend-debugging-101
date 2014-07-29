@@ -1,55 +1,47 @@
 var async = require('async');
 var usrCode = require('./usrcode');
 var sourceFunc1 = usrCode.func1;
-var sourceFunc2 = usrCode.func2;
 
 module.exports = {
     restart      : restart,
     reset        : reset,
-    name         : 'how did I get here?',
-    subtitle     : '',
-    instructions : ''
+    name         : 'prevented',
+    subtitle     : 'preventDefault()',
+    instructions : "find the listener\n that called prevent\n default on your event"
 
 };
 
 function restart(stage, env){
-    env.clog.log('Click the button to pass');
 
     stage.classList.add('center-con');
     stage.innerHTML = '' +
-        '<button class="btn btn-default btn-lg" type="button">async</button>';
+        '<button class="btn btn-default btn-lg" type="button" id="btn">listeners</button>';
 
-    var buttonNode = stage.querySelector('button');
+    var buttonNode = stage.querySelector('#btn');
 
     var code1Str = env.getData('code1') || sourceFunc1.toString();
-    var code2Str = env.getData('code2') || sourceFunc2.toString();
 
-    async.parallel({
-        one: function(callback){
-            env.code.create(code1Str, { name:'ONE' }, callback);
-        },
-        two: function(callback){
-            env.code.create(code2Str, { name:'TWO' }, callback);
-        }
-    },
-    function(err, results) {
 
-        env.codeWatcher.watchCode(results.one, function(func, newVal, oldVal){
+    env.code.create(code1Str, {}, function(err, code1){
+
+        env.codeWatcher.watchCode(code1, function(func, newVal, oldVal){
             env.saveData('code1', newVal);
         });
-        env.codeWatcher.watchCode(results.two, function(func, newVal, oldVal){
-            env.saveData('code2', newVal);
+
+        code1(buttonNode); // listen to click and prevent default
+
+        buttonNode.addEventListener('click', function finishIfEventIsNotPrevented(event){
+            if(!event.defaultPrevented){
+                env.finishLevel(true);
+            } else {
+                env.clog.error('prevent default on event was called..');
+            }
         });
 
-        buttonNode.addEventListener("click", function(){
-            results.one(results.two, function(){
-                env.finishLevel(true);
-            });
-        });
     });
+
 }
 
 function reset(stage, env){
     env.removeData('code1');
-    env.removeData('code2');
 }

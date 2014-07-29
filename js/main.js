@@ -10,7 +10,10 @@ var LEVELS = [
     require("./exercises/002/main.js"),
     require("./exercises/003/main.js"),
     require("./exercises/004/main.js"),
-    require("./exercises/005/main.js")
+    require("./exercises/005/main.js"),
+    require("./exercises/006/main.js"),
+    require("./exercises/007/main.js"),
+    require("./exercises/008/main.js")
 ];
 var _options;
 var currentLevelIndex;
@@ -36,6 +39,7 @@ function playLevel(levelIndex){
         levelTitleNode.setAttribute('index', levelIndex + 1);
         levelTitleNode.innerText = level.name;
         getLevelButton(levelIndex).setAttribute('current', true);
+        clog.instructions(level.instructions);
         level.restart(_options.levelNode, getLevelEnv(levelIndex));
     } else {
         console.log('LEVEL %s NOT FOUND', levelIndex);
@@ -55,6 +59,7 @@ function clearLevel(){
 }
 
 function finishLevel(levelIndex, mode){
+    if(mode !== true) return;
 //    alert('level ' + levelIndex + ' passed!');
     storage.setIsPass(levelIndex, true);
     var levelButton = getLevelButton(levelIndex);
@@ -96,7 +101,7 @@ function setLevels(levelsNode){
     var levelsHtml = '';
     LEVELS.forEach(function(level, index){
         var isDone = storage.getIsPass(index);
-        levelsHtml += '<li title="' + level.name + '" done="' + isDone + '" rol="level-btn">' + (index+1) + '</li>'
+        levelsHtml += '<li title="' + level.subtitle + '" done="' + isDone + '" rol="level-btn">' + (index+1) + '</li>'
     });
     levelsNode.innerHTML = '<ul class="level-list">' + levelsHtml + '</ul>';
     levelsNode.addEventListener('click', function(event){
