@@ -6,7 +6,7 @@ Pass each exercise by finding an error in the code and fixing it right inside th
 fix code by
 ===========
 1. refactore code
-2. click ctrl+s / command+s
+2. click ctrl+s or command+s
 3. make sure the "code changed successfully!" - if this is not shown then something went wrong with the recompilation
 
 * you can refresh the page and your code changes will be saved - click reset level to return to original code.
