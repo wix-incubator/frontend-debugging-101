@@ -13,7 +13,8 @@
     "browserify": "^4.2.1",
     "lodash": "2.4.1",
     "literalify": "~0.3.0",
-    "uglifyify": "~2.5.0"
+    "uglifyify": "~2.5.0",
+    "open": "0.0.5"
   },
   "devDependencies": {},
   "scripts": {

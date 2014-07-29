@@ -7,6 +7,7 @@ var http       = require("http");
 var handlebars = require("express3-handlebars");
 var browserify = require('browserify');
 var literalify = require('literalify');
+var open       = require('open');
 
 var app = express();
 var server = http.createServer(app);
@@ -50,3 +51,4 @@ app.get("/", function(req, res) {
 
 server.listen(5555, 'localhost');
 console.log("open http://localhost:5555");
+open("http://localhost:5555");
