@@ -1,4 +1,4 @@
-browser-debug-101
-=================
+frontend-debugging-101
+======================
 
-browser debugging overview
+Ido Rosental's exercise
