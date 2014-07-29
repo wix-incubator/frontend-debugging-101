@@ -49,3 +49,4 @@ app.get("/", function(req, res) {
 });
 
 server.listen(5555, 'localhost');
+console.log("open http://localhost:5555");
