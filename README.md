@@ -5,7 +5,7 @@ Pass each exercise by finding an error in the code and fixing it right inside th
 
 fix code by
 ===========
-1. refactore code
+1. refactore code (in the chrome dev tools)
 2. click ctrl+s or command+s
 3. make sure the "code changed successfully!" - if this is not shown then something went wrong with the recompilation
 
