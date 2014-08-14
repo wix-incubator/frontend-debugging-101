@@ -15,9 +15,10 @@ install & run
 =============
 
 1. git clone https://github.com/wix/frontend-debugging-101.git
-2. npm install
-3. node app
-4. solve exercises in the browser (http://localhost:5555)
+2. cd frontend-debugging-101
+3. npm install
+4. node app
+5. solve exercises in the browser (http://localhost:5555)
 
 
 Ido     Omry    Tom
