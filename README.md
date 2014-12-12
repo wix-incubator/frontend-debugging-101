@@ -1,7 +1,7 @@
 frontend-debugging-101
 ======================
 This set of fun exercises are suppose to show different aspects of the chrome developer tools.
-Pass each exercise by finding an error in the code and fixing it right inside the dev tools.
+Pass each exercise by finding errors in the code and fixing them right inside the dev tools.
 
 fix code by
 ===========
