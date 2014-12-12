@@ -20,7 +20,5 @@ install & run
 4. node app
 5. solve exercises in the browser (http://localhost:5555)
 
-
-Ido     Omry    Tom
-
 ![Ido Rosental's exercise](https://github.com/wix/frontend-debugging-101/blob/master/monsters.jpg)
+Ido     Omry    Tom
