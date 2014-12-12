@@ -1,0 +1,28 @@
+solutions:
+
+1 (typo)
+click error in console > fix code
+
+2 (scope)
+click error in console > fix code
+
+3 (running button)
+3.1 find button in dom > break on attribute change > find code and fix
+3.2 Sources panel > Event Listener Breakpoints > Mouse > mouseover > rollover the button to find the code and fix
+
+4 (async)
+add breakpoint to code (where console log is generated) > enable Async stack > find caller code and fix
+
+
+5 (find the listener that called prevent default on your event)
+5.1 Elements panel > find the button element > select event listeners > "click" event > look at handlers
+5.2 Sources panel > Event Listener Breakpoints > Mouse > click > click the button
+
+6 (try finding the slow code)
+Profiles panel > collect JavaScript CPU Profile & start > click chain reaction button & stop record after failure > look at Bottom Up profile mode > look for bottleneck
+
+7 (keypad)
+go to code > fix error in missing for closure (avoid v8 re-closure issues by rewriting the code and deleting the old one)
+
+8 (chain reaction)
+same as 6 (but you can also see the spike in flame chart because the call are async)
