@@ -21,4 +21,5 @@ install & run
 5. solve exercises in the browser (http://localhost:5555)
 
 ![Ido Rosental's exercise](https://github.com/wix/frontend-debugging-101/blob/master/monsters.jpg)
+
 Ido     Omry    Tom
