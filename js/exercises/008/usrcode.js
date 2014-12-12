@@ -5,6 +5,6 @@ module.exports = {
 function callNextFuncImmediately(nextFunc){
     var startTime = new Date();
     function fib(index){return (index<=2) ? 1 : fib(index-1)+fib(index-2);}
-        fib(30);
+        fib(40);
         nextFunc();
 }

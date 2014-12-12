@@ -42,12 +42,12 @@ function getFileName(name){
 //}
 
 function createScriptUrlFromBlob(id, code, contentFileName){
-    var content = _options.registerPath + '("' + id + '", \n\n/** CODE START **/\n\n' + code + '\n\n/** CODE END **/\n\n)' + '//# sourceURL=' +  contentFileName;
+    var content = _options.registerPath + '("' + id + '", \n\n/** CODE START **/\n\n' + code + '\n\n/** CODE END **/\n\n)\n\n//# sourceURL=' +  contentFileName + '\n\n';
     return URL.createObjectURL(new Blob([content], {type: 'text/javascript'}));
 }
 
 function createScriptUrlFromServer(id, code, contentFileName){
-    var content = _options.registerPath + '("' + id + '", \n' + code + '\n)' + '//# sourceURL=' +  contentFileName;
+    var content = _options.registerPath + '("' + id + '", \n' + code + '\n)\n\n//# sourceURL=' +  contentFileName + '\n\n';
     return '/code/' + encodeURI(content.replace('#', '$HASH$'));
 }
 

@@ -31,7 +31,8 @@ function restart(stage, env){
         var clickTime = null;
 
         function callFinish(){
-            if(new Date()-clickTime < 10){
+            console.log(new Date()-clickTime);
+            if(new Date()-clickTime < 550){
                 env.finishLevel(true);
             } else {
                 env.clog.error('it took too much time. better luck next time.');
@@ -40,8 +41,8 @@ function restart(stage, env){
         }
 
         var prevFunc = callFinish;
-        for(var i = 0; i < 500; i++){
-            if(i !== 250) {
+        for(var i = 0; i < 100; i++){
+            if(i !== 50) {
                 prevFunc = function(callNext, index){
                     setTimeout(callNext, 0);
                 }.bind(null, prevFunc, i)
