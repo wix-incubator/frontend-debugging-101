@@ -9,7 +9,7 @@ install & run
 1. git clone https://github.com/wix/frontend-debugging-101.git
 2. cd frontend-debugging-101
 3. npm install
-4. node app (chrome should open automaticly)
+4. node app (chrome should open automatically)
 5. open dev tools and add "/bundle\.js$" to blackbox (Settings > General > Manage framework blackboxing)
 5. solve exercises in the browser (http://localhost:5555)
 
