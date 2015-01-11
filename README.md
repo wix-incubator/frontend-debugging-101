@@ -15,12 +15,9 @@ install & run
 
 fix code by
 ===========
-1. refactore code (in the chrome dev tools)
-
+1. refactore code (in the chrome dev tools).
 2. click ctrl+s or command+s.
-
-3. make sure the "code changed successfully!" 
-	console message - **if this is not shown then something went wrong with the recompilation**
+3. make sure the "code changed successfully!" console message - **if this is not shown then something went wrong with the recompilation**
 
 * you can refresh the page and your code changes will be saved - click reset level to return to original code.
 
