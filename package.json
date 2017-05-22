@@ -7,23 +7,27 @@
   "dependencies": {
     "async": "~0.8.0",
     "cors": "^2.2.0",
-    "express": "^3.4.8",
+    "express": "^4.15.3",
     "express3-handlebars": "^0.5.0",
     "request": "^2.34.0",
     "browserify": "^4.2.1",
     "lodash": "2.4.1",
     "literalify": "~0.3.0",
     "uglifyify": "~2.5.0",
-    "open": "0.0.5"
+    "open": "0.0.5",
+    "snyk": "^1.30.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
     "url": "git@git.wixpress.com:core3poc/core3poc.git"
   },
   "author": "",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+  "snyk": true
 }
