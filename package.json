@@ -10,10 +10,10 @@
     "express": "^3.4.8",
     "express3-handlebars": "^0.5.0",
     "request": "^2.34.0",
-    "browserify": "^4.2.1",
+    "browserify": "^9.0.0",
     "lodash": "2.4.1",
     "literalify": "~0.3.0",
-    "uglifyify": "~2.5.0",
+    "uglifyify": "~4.0.0",
     "open": "0.0.5"
   },
   "devDependencies": {},
